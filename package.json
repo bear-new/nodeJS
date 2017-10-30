@@ -1,0 +1,15 @@
+{
+  "name": "cars",
+  "version": "1.0.0",
+  "description": "practice nodejs mongodb vue react-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bearnew",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4"
+  }
+}
