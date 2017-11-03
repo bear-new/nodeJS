@@ -6,5 +6,8 @@ module.exports = function() {
 		useMongoClient: true,
 	});
 
+	require('../app/models/banner.server.model');
 	require('../app/models/news.server.model');
+	require('../app/models/brand.server.model');
+	require('../app/models/carsList.server.model');
 }
