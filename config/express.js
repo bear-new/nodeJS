@@ -6,7 +6,9 @@ module.exports = function() {
 	console.log('init express...');
 	var app = express();
 
+	app.use(bodyParser());
 	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
 
 	require('../app/routes/banner.server.routes')(app);
 	require('../app/routes/news.server.routes')(app);

@@ -11,5 +11,7 @@ module.exports = function(app) {
 
 	app.param('id', CarsController.getById);
 
-	app.param('name', CarsController.getByName);
+	app.route('/carsList/query')
+		.post(CarsController.getByName)
+
 }
