@@ -10,4 +10,5 @@ module.exports = function(app) {
 		.get(NewsController.get);
 
 	app.param('id', NewsController.getById);
+
 }

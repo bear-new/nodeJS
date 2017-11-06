@@ -10,4 +10,6 @@ module.exports = function(app) {
 		.get(CarsController.get);
 
 	app.param('id', CarsController.getById);
+
+	app.param('name', CarsController.getByName);
 }

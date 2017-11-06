@@ -42,6 +42,21 @@ module.exports = {
 		})
 	},
 
+	getByName: function(req, res, next, name) {
+		if (!name) return next(new Error('Cars not Found'));
+
+		Cars
+		.findOne({name: name})
+		.exec(function(err, doc) {
+			if (err) return next(err);
+
+			if (doc) return next(new Error('Cars not Found'));
+
+			req.cars = doc;
+			return next();
+		})
+	},
+
 	get: function(req, res, next) {
 		return res.json(req.cars);
 	}
