@@ -46,13 +46,14 @@ module.exports = {
 		if (!name) return next(new Error('Cars not Found'));
 
 		Cars
-		.findOne({name: name})
+		.find({name: /name/})
 		.exec(function(err, doc) {
 			if (err) return next(err);
 
 			if (doc) return next(new Error('Cars not Found'));
 
 			req.cars = doc;
+			console.log(cars)
 			return next();
 		})
 	},
