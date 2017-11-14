@@ -12,9 +12,14 @@ module.exports = {
 		.skip( (pagestart - 1) * pagesize )
 		.limit(pagesize)
 		.exec(function(err, docs) {
-			if ( err ) return next(err);
+			if ( err ) throw new Error('err');
 
-			return res.json(docs);  
+			var data = {
+					status: 1,
+					list: docs,
+					message: '查询轮播图成功'
+				}
+			return res.json(data);  
 		})
 	},
 }

@@ -6,9 +6,14 @@ module.exports = {
 	create: function(req, res, next) {
 		var news = new News(req.body);
 		news.save(function(err) {
-			if (err) return next(err);
+			if (err) throw new Error(err);
 
-			return res.json(news);
+			data = {
+				status: 1,
+				news: news,
+				message: '增加新闻成功!'
+			}
+			return res.json(data);
 		})
 	},
 
@@ -21,28 +26,47 @@ module.exports = {
 		.skip( (pagestart - 1) * pagesize )
 		.limit(pagesize)
 		.exec(function(err, docs) {
-			if ( err ) return next(err);
+			if ( err ) throw new Error('err');
 
-			return res.json(docs);  
+			var data = {
+					status: 1,
+					list: docs,
+					message: '查询新闻列表成功'
+				}
+			return res.json(data);  
 		})
 	},
 
 	getById: function(req, res, next, id) {
-		if (!id) return next(new Error('News not Found'));
+		if (!id) throw new Error('News not Found');
 
 		News
 		.findOne({_id: id})
 		.exec(function(err, doc) {
-			if (err) return next(err);
+			if (err) throw new Error(err);
 
-			if (doc) return next(new Error('News not Found'));
+			if (doc) throw new Error('News not Found');
 
-			req.news = doc;
+			var data = [];
+			if (doc.length === 0) {
+				data = {
+					status: 0,
+					list: [],
+					message: '未搜索到该新闻相关信息'
+				}
+			} else {
+				data = {
+					status: 1,
+					list: doc,
+					message: '查询新闻信息成功'
+				}
+			}
+			req.data = data;
 			return next();
 		})
 	},
 
 	get: function(req, res, next) {
-		return res.json(req.news);
+		return res.json(req.data);
 	}
 }
