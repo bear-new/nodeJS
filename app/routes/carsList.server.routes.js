@@ -12,6 +12,9 @@ module.exports = function(app) {
 	app.param('id', CarsController.getById);
 
 	app.route('/carsList/query')
-		.post(CarsController.getByName)
+		.post(CarsController.getByName);
+
+	app.route('/carsList/sort')
+		.post(CarsController.getByType);
 
 }
