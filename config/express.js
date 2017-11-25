@@ -10,6 +10,7 @@ module.exports = function() {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
+	require('../app/routes/users.server.routes')(app);
 	require('../app/routes/banner.server.routes')(app);
 	require('../app/routes/news.server.routes')(app);
 	require('../app/routes/brand.server.routes')(app);
