@@ -100,6 +100,60 @@ module.exports = {
 		})
 	},
 
+	getBySort: function(req, res, next) {
+		var sortValue = req.body.sortValue;
+		var sortType = req.body.sortType;
+		if (!sortValue) {
+			throw new Error('请传入需要查找的汽车类型');
+		}
+
+		if ( sortValue == 'price' ) {
+			Cars
+			.find({})
+			.sort({price: sortType})
+			.exec(function(err, doc) {
+				if (err) throw new Error(err);
+				var data = [];
+				if (doc.length === 0) {
+					data = {
+						status: 0,
+						list: [],
+						message: '未搜索到该类别下的汽车'
+					}
+				} else {
+					data = {
+						status: 1,
+						list: doc,
+						message: '查询该类别汽车成功'
+					}
+				}
+				return res.json(data);
+			})
+		} else {
+			Cars
+			.find({})
+			.sort({name: sortType})
+			.exec(function(err, doc) {
+				if (err) throw new Error(err);
+				var data = [];
+				if (doc.length === 0) {
+					data = {
+						status: 0,
+						list: [],
+						message: '未搜索到该类别下的汽车'
+					}
+				} else {
+					data = {
+						status: 1,
+						list: doc,
+						message: '查询该类别汽车成功'
+					}
+				}
+				return res.json(data);
+			})
+		}
+	},
+
 	getById: function(req, res, next, id) {
 		if (!id) return next(new Error('Cars not Found'));
 

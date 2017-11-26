@@ -14,7 +14,10 @@ module.exports = function(app) {
 	app.route('/carsList/query')
 		.post(CarsController.getByName);
 
-	app.route('/carsList/sort')
+	app.route('/carsList/rank')
 		.post(CarsController.getByType);
+
+	app.route('/carsList/sort')
+		.post(CarsController.getBySort)
 
 }
